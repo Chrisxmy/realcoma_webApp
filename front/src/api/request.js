@@ -44,15 +44,17 @@ function successState(res) {
 
 }
 
-const baseURL = '/api'
+const baseURL =  process.env.NODE_ENV === 'development' ? '/' : '/api'
+
+axios.defaults.baseURL = baseURL
 
 
-const Axios = (opts) => {
+export const request = (opts) => {
 
     let Public = { //公共参数
     }
     let httpDefaultOpts = { //http默认配置
-        method:opts.method || 'get',
+        method:opts.method || 'POST',
         url: opts.url,
         timeout: 10000,
         params:opts.params,
@@ -95,4 +97,3 @@ const Axios = (opts) => {
 }
 
 
-export default Axios
