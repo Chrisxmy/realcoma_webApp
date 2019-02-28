@@ -2,7 +2,7 @@ import axios from 'axios/index'
 import io from 'socket.io-client'
 
 const socketUrl =
-  process.env.NODE_ENV === 'development' ? 'ws://localhost:8888' : 'ws://api'
+  process.env.NODE_ENV === 'development' ? 'ws://localhost:8888' : 'ws://'
 
 const socket = io(socketUrl)
 

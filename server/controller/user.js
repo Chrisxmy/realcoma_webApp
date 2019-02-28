@@ -1,5 +1,5 @@
 const UserModel = require('../models/users.js')
-const host = process.env.NODE_ENV === 'production' ? 'http://qiniu.xiemengyang.site/' : 'http://qiniu.xiemengyang.site/'
+const host = process.env.NODE_ENV === 'production' ? 'qiniu.xiemengyang.site/' : 'qiniu.xiemengyang.site/'
 
 exports.login = async (ctx, next) => {
     let user = await UserModel.login(ctx.request.body)
