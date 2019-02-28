@@ -18,13 +18,13 @@ import Chat from './components/chat/chat.js'
 
 
 
-const reduxDevtools = window.devToolsExtension ? window.devToolsExtension : f=>f
+// const reduxDevtools = window.devToolsExtension ? window.devToolsExtension : f=>f
 
 
 
 const store = createStore(reducer, compose(
     applyMiddleware(thunk),
-    reduxDevtools()
+    // reduxDevtools()
 ))
 
 class App extends React.Component{
