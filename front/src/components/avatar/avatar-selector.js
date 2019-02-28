@@ -9,7 +9,7 @@ class AvatarPicker extends React.Component {
         formData.append('file', files)
         axios({
             method: 'post',
-            url: '/api/upload',
+            url: '/upload',
             data: formData
         }).then(res => {
             this.props.onChange(res.data)
