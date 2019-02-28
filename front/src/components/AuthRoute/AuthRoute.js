@@ -14,9 +14,9 @@ class AuthRoute extends React.Component {
     }
     usrStatus(user) {
         if(!user.avatar) {
-            user.type === "genius" ? this.goPage('/geniusInfo') : this.goPage('/bossInfo')
+            this.goPage('/info')
         } else {
-            user.type === "genius" ? this.goPage('/genius') : this.goPage('/boss')
+           user.type === "genius" ? this.goPage('/genius') : this.goPage('/boss')
         }
     }
     componentDidMount() {
@@ -24,7 +24,6 @@ class AuthRoute extends React.Component {
         const pathname = this.props.location.pathname
 
         if(publicPage.includes(pathname)) return
-
        axios.get('/info').then((res) => {
             if(res.data.code === 0) {
                 const user = res.data.data[0]

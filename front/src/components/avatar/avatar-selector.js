@@ -1,18 +1,27 @@
 import React from 'react'
-
+import axios from 'axios'
+import './avatar-selector.scss'
 
 class AvatarPicker extends React.Component {
     selectAvatar(e){
-        this.props.onChange(e)
+        const files = e.target.files[0]
+        let formData = new FormData()
+        formData.append('file', files)
+        axios({
+            method: 'post',
+            url: '/upload',
+            data: formData
+        }).then(res => {
+            this.props.onChange(res.data)
+        })
     }
 
     render() {
         return (
-            <div style={{textAlign:'center'}}>
-                <img style={{width:80,height:80,margin:'10px 10px 10px 0',verticalAlign:'middle'}}
-                     src={this.props.avatar}
+            <div className='avatar-selector'>
+                <img src={this.props.avatar}
                      ></img>
-                <label htmlFor="avatar">选择头像</label>
+                <label htmlFor="avatar" className='select'></label>
                 <input id='avatar' style={{display:'none'}} type='file' onChange={(e)=>{this.selectAvatar(e)}}/>
             </div>
         );

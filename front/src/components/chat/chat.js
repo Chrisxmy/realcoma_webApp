@@ -53,7 +53,6 @@ class Chat extends React.Component {
   render() {
     const from = this.props.user._id
     const username = this.props.match.params.username
-
     const avatar = this.props.user.avatar
     return (
       <div>

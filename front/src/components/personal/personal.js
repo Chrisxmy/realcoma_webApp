@@ -15,15 +15,9 @@ const btnStyle = {
 class Personal extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-
-        }
-
     }
-    changeInfo(user){
-        user.type === "genius" ?
-            this.props.history.push('/geniusInfo') :
-            this.props.history.push('/bossInfo')
+    changeInfo(){
+        this.props.history.push('/info')
     }
     logout(){
         axios({
@@ -56,7 +50,7 @@ class Personal extends React.Component {
                     </ul>
                 <WhiteSpace></WhiteSpace>
                 <WhiteSpace></WhiteSpace>
-                <Button onClick={()=>{this.changeInfo(user)}} style={btnStyle} >修改资料</Button>
+                <Button onClick={()=>{this.changeInfo()}} style={btnStyle} >修改资料</Button>
                 <WhiteSpace></WhiteSpace>
                 <Button onClick={()=>{this.logout()}} style={btnStyle}>退出登陆</Button>
             </div> : <Redirect to={this.props.redirectTo}/>

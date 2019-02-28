@@ -1,6 +1,5 @@
 const Koa = require('koa');
-const path = require('path')
-const fs = require('fs')
+
 const bodyParser = require('koa-bodyparser');
 const {handleError} = require('./middlewares/handleError')
 require('./service/mongoose.js')
@@ -10,17 +9,15 @@ const server = require('http').Server(app.callback())
 
 io(server);
 
-const user = require('./routes/user.js')
-const chat = require('./routes/chat.js')
-const upload = require('./routes/upload.js')
+const router = require('./routes/router.js')
+
 
 
 app.use(bodyParser());
 app.use(handleError());
 
-app.use(user.routes(), user.allowedMethods())
-app.use(chat.routes(), chat.allowedMethods())
-app.use(upload.routes(), upload.allowedMethods())
+app.use(router.routes(), router.allowedMethods())
+
 
 
 server.listen(8888, () => {

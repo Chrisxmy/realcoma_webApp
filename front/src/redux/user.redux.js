@@ -1,5 +1,4 @@
 import {Toast} from 'antd-mobile'
-import axios from 'axios'
 import {request} from '../api/request.js'
 
 const ERROR_MSG = 'ERROR_MSG'
@@ -16,17 +15,12 @@ const initState = {
 }
 
 
-function getRedirectPath({type, avatar}) {
-    let url = (type === 'boss') ? '/boss' : '/genius'
-    if (!avatar) url += 'Info'
-    console.log(url)
-    return url
-}
+
 
 export function user(state = initState, action) {
     switch (action.type) {
         case AUTH_SUCCESS:
-            return {...state, msg: '', redirectTo: getRedirectPath(action.payload), ...action.payload, password: ''}
+            return {...state, msg: '', redirectTo: '/info', ...action.payload, password: ''}
         case IS_AUTH:
             return {...state, msg: '', ...action.payload}
         case ERROR_MSG:
@@ -47,7 +41,6 @@ function AuthSuccess(data) {
 
 
 function errorMsg(msg) {
-    Toast.fail(msg, 1)
     return {msg, type: ERROR_MSG}
 }
 
@@ -59,13 +52,12 @@ export function register({username, password, repeatPassword, type}) {
         return errorMsg('密码和确认密码不同')
     }
     return dispatch => {
-        axios.post('/register', {username, password, type})
+        request({
+            url: '/register',
+            data: {username, password, type}
+        })
             .then(res => {
-                if (res.status === 200 && res.data.code === 0) {
-                    dispatch(AuthSuccess({username, password, type}))
-                } else {
-                    dispatch(errorMsg(res.data.msg))
-                }
+                 dispatch(AuthSuccess({username, password, type}))
             })
     }
 }
@@ -88,11 +80,7 @@ export function login({username, password}) {
                 password
             }
         }).then(res => {
-            if (res.status === 200 && res.data.code === 0) {
-                dispatch(AuthSuccess(res.data))
-            } else {
-                dispatch(errorMsg(res.message))
-            }
+            dispatch(AuthSuccess(res.data))
         }).catch(err => {
             dispatch(errorMsg(err.response.data.message))
         })
@@ -103,13 +91,11 @@ export function login({username, password}) {
 export function update(data) {
     const {password, ...obj} = data
     return dispatch => {
-        axios.post('/user/update', obj)
-            .then(res => {
-                if (res.status === 200 && res.data.code === 0) {
-                    dispatch(AuthSuccess(res.data.data))
-                } else {
-                    dispatch(errorMsg(res.data.msg))
-                }
+        request({
+            url:'/user/update',
+            data:obj
+        }).then(res => {
+               dispatch(AuthSuccess(res.data))
             })
     }
 }

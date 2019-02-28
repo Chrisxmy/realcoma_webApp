@@ -1,17 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
-import { Toast } from 'antd-mobile'
-
-axios.interceptors.request.use(function(config){
-    Toast.loading('加载中',0)
-    return config
-})
-
-axios.interceptors.response.use(function(config){
-        Toast.hide()
-})
-
-
+import {Toast} from 'antd-mobile'
 
 axios.interceptors.request.use(config => {
     if(JSON.parse(localStorage.getItem('userInfo'))){
@@ -27,7 +16,6 @@ axios.interceptors.request.use(config => {
 
 
 axios.interceptors.response.use(response => {
-
     return response
 }, error => {
     if(error.response && error.response.status === 401) {
@@ -79,12 +67,14 @@ export const request = (opts) => {
       httpDefaultOpts.data = opts.data
     }
 
-
-
     let promise = new Promise(function(resolve, reject) {
         axios(httpDefaultOpts).then(
             (res) => {
-                resolve(res.data)
+                if (res.status === 200 && res.data.code === 0) {
+                    resolve(res.data)
+                } else {
+                    Toast.fail(res.data.message, 1)
+                }
             }
         ).catch(
             (response) => {

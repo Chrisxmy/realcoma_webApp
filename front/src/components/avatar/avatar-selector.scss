@@ -1,0 +1,19 @@
+@mixin avatar-size{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.avatar-selector{
+  position: relative;
+  @include avatar-size;
+  img{
+    @include avatar-size;
+  }
+  .select{
+    position: absolute;
+    top:0;
+    left:0;
+    display: inline-block;
+    @include avatar-size;
+  }
+}

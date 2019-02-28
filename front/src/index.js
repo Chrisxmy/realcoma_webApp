@@ -12,20 +12,19 @@ import './assets/css/common.scss'
 import Login from './pages/login/login.js'
 import Register from './pages/register/register.js'
 import AuthRoute from './components/AuthRoute/AuthRoute.js'
-import BossInfo from './pages/info/boss.js'
-import GeniusInfo from './pages/info/genius.js'
+import Info from './pages/info/info.js'
 import DashBoard from './components/DashBoard/DashBoard.js'
 import Chat from './components/chat/chat.js'
 
 
 
-// const reduxDevtools = window.devToolsExtension ? window.devToolsExtension : f=>f
+const reduxDevtools = window.devToolsExtension ? window.devToolsExtension : f=>f
 
 
 
 const store = createStore(reducer, compose(
     applyMiddleware(thunk),
-    // reduxDevtools()
+    reduxDevtools()
 ))
 
 class App extends React.Component{
@@ -37,7 +36,6 @@ class App extends React.Component{
     }
 
     componentDidCatch(err,info){
-        console.log(err,info)
         this.setState({
             hasError:true
         })
@@ -48,8 +46,7 @@ class App extends React.Component{
                 <div>
                     <AuthRoute></AuthRoute>
                     <Switch>
-                        <Route path='/geniusInfo' component={GeniusInfo}></Route>
-                        <Route path='/bossInfo' component={BossInfo}></Route>
+                        <Route path='/info' component={Info}></Route>
                         <Route path='/login' component={Login}></Route>
                         <Route path='/register' component={Register}></Route>
                         <Route path='/chat/:id/:username' component={Chat}></Route>
