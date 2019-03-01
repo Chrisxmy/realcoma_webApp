@@ -19,7 +19,7 @@ class AvatarPicker extends React.Component {
     render() {
         return (
             <div className='avatar-selector'>
-                <img src={this.props.avatar}
+                <img src={this.props.avatar} alt=''
                      ></img>
                 <label htmlFor="avatar" className='select'></label>
                 <input id='avatar' style={{display:'none'}} type='file' onChange={(e)=>{this.selectAvatar(e)}}/>

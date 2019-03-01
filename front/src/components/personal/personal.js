@@ -13,9 +13,6 @@ const btnStyle = {
     state=>state.user,{logout}
 )
 class Personal extends React.Component {
-    constructor(props) {
-        super(props)
-    }
     changeInfo(){
         this.props.history.push('/info')
     }

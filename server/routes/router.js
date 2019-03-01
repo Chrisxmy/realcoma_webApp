@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 const router = new Router({
-    prefix: process.env.NODE_ENV === 'production' ? '/api' : ''
+    prefix: process.env.NODE_ENV === 'production' ? '/api' : '/api'
 })
 const path = require('path')
 const isAuth = require('../middlewares/auth')

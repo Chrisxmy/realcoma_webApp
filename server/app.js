@@ -1,4 +1,5 @@
 const Koa = require('koa');
+const static = require('koa-static');
 
 const bodyParser = require('koa-bodyparser');
 const {handleError} = require('./middlewares/handleError')
@@ -17,6 +18,10 @@ app.use(bodyParser());
 app.use(handleError());
 
 app.use(router.routes(), router.allowedMethods())
+
+app.use(static(__dirname + '/public',{
+    gzip: false
+}));
 
 
 

@@ -2,7 +2,7 @@ import axios from 'axios/index'
 import io from 'socket.io-client'
 
 const socketUrl =
-  process.env.NODE_ENV === 'development' ? '/' : '/'
+  process.env.NODE_ENV === 'development' ? 'http://localhost:8888' : '/'
 
 const socket = io(socketUrl)
 

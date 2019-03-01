@@ -1,52 +1,30 @@
-import React ,{ Suspense, lazy }from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {HashRouter, Route, Switch} from 'react-router-dom'
 
 import reducer from './reducer.js'
 import './assets/css/reset.scss'
 import './assets/css/common.scss'
 import AuthRoute from './components/AuthRoute/AuthRoute.js'
+import loading from  './components/loading/loading.js'
 // import Login from './pages/login/login.js'
 // import Register from './pages/register/register.js'
 // import Info from './pages/info/info.js'
 // import DashBoard from './components/DashBoard/DashBoard.js'
 // import Chat from './components/chat/chat.js'
 
+
+
 import Loadable from 'react-loadable';
 
-const DashBoard = Loadable({
-    loader: () => import('./components/DashBoard/DashBoard.js'),
-    loading() {
-        return <div>Loading...</div>
-      }
-  })
-  const Chat = Loadable({
-    loader: () => import('./components/chat/chat.js'),
-    loading() {
-        return <div>Loading...</div>
-      }
-  })
-  const Info = Loadable({
-    loader: () => import('./pages/info/info.js'),
-    loading() {
-        return <div>Loading...</div>
-      }
-  })
-  const Login = Loadable({
-    loader: () => import('./pages/login/login.js'),
-    loading() {
-        return <div>Loading...</div>
-      }
-  })
-  const Register = Loadable({
-    loader: () => import('./pages/register/register.js'),
-    loading() {
-        return <div>Loading...</div>
-      }
-  })
+const DashBoard = Loadable({ loader: () => import('./components/DashBoard/DashBoard.js'), loading })
+const Chat = Loadable({ loader: () => import('./components/chat/chat.js'),  loading})
+const Info = Loadable({ loader: () => import('./pages/info/info.js'), loading})
+const Login = Loadable({ loader: () => import('./pages/login/login.js'), loading})
+const Register = Loadable({ loader: () => import('./pages/register/register.js'),loading})
 
 // const reduxDevtools = window.devToolsExtension ? window.devToolsExtension : f=>f
 
@@ -72,7 +50,7 @@ class App extends React.Component{
     }
     render(){
         return (<Provider store={store}>
-            <BrowserRouter>
+            <HashRouter>
                 <div>
                     <AuthRoute></AuthRoute>
                     <Switch>
@@ -83,7 +61,7 @@ class App extends React.Component{
                         <Route component={DashBoard}></Route>
                     </Switch>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         </Provider>)
     }
 }

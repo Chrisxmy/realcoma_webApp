@@ -25,29 +25,21 @@ axios.interceptors.response.use(response => {
     return Promise.resolve(error.response)
 })
 
-function errorState(response) {
-}
 
-function successState(res) {
-
-}
-
-const baseURL =  process.env.NODE_ENV === 'development' ? '/' : '/api'
+const baseURL =  process.env.NODE_ENV === 'development' ? '/api' : '/api'
 
 axios.defaults.baseURL = baseURL
 
 
 export const request = (opts) => {
-
-    let Public = { //公共参数
-    }
+   
     let httpDefaultOpts = { //http默认配置
         method:opts.method || 'POST',
         url: opts.url,
         timeout: 10000,
         params:opts.params,
         data:qs.stringify(opts.data),
-        headers: opts.method=='get'?{
+        headers: opts.method === 'get'?{
             'X-Requested-With': 'XMLHttpRequest',
             "Accept": "application/json",
             "Content-Type": "application/json; charset=UTF-8"
@@ -57,13 +49,13 @@ export const request = (opts) => {
         }
     }
 
-    if(httpDefaultOpts.method=='get'){
+    if(httpDefaultOpts.method === 'get'){
         delete httpDefaultOpts.data
     }else{
         delete httpDefaultOpts.params
     }
 
-    if(httpDefaultOpts.method=='patch'){
+    if(httpDefaultOpts.method === 'patch'){
       httpDefaultOpts.data = opts.data
     }
 

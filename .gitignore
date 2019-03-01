@@ -13,6 +13,8 @@
 
 /.idea
 
+/front
+
 # production
 /build
 

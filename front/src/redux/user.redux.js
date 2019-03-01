@@ -1,4 +1,4 @@
-import {Toast} from 'antd-mobile'
+
 import {request} from '../api/request.js'
 
 const ERROR_MSG = 'ERROR_MSG'
