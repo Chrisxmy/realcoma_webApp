@@ -5,6 +5,7 @@ const User = require('../models/users.js')
 exports.io = function(server){
         const io = require('socket.io')(server)
         io
+        .of('/api')
         .on('connection', async function (socket) {
             socket.on('sendMsg', async function (data) {
                 let msg = await Chat.createMsg(data)
