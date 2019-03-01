@@ -12,13 +12,17 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bluebird": "^3.5.2",
-    "qiniu": "^7.2.1",
-    "socket.io": "^2.1.1",
     "koa": "^2.5.3",
     "koa-bodyparser": "^4.2.1",
     "koa-multer": "^1.0.2",
     "koa-router": "^7.4.0",
     "koa-static": "^3.0.0",
-    "mongoose": "^4.11.6"
+    "mongoose": "^4.11.6",
+    "qiniu": "^7.2.1",
+    "react-loadable": "^5.5.0",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.1.0"
   }
 }
